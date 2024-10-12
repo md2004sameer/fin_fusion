@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        /* Base Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f2f6ff;
+    color: #333;
+    margin: 0;
+    max-width: 700px;
+    padding: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 50px;
+   
+}
+.container {
+    max-width: 700px; /* Width of the centered content */
+    padding: 20px; /* Padding for some breathing space */
+    background-color: #fff; /* Background color for the content */
+    border-radius: 10px; /* Optional rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+/* Accessibility: Focus states */
+body:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:focus {
+    outline: 2px solid #007BFF;
+    outline-offset: 2px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(145deg, #d8e3f1, #ffffff);
+    box-shadow: 5px 5px 10px #b3b9c7, -5px -5px 10px #ffffff;
+    border-radius: 20px;
+    margin: 20px;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: font-size 0.3s ease;
+}
+
+/* Hover effect for header */
+.header:hover {
+    box-shadow: 10px 10px 20px #b3b9c7, -10px -10px 20px #ffffff;
+}
+
+/* Container for main content */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Dropdown Styles */
+.dropdown {
+    margin-bottom: 20px;
+    position: relative;
+    transition: margin-bottom 0.3s ease;
+}
+
+.dropdown-button {
+    background: #007BFF;
+    color: white;
+    padding: 15px;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s, box-shadow 0.3s ease;
+}
+
+.dropdown-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content {
+    display: none;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.dropdown-content.active {
+    display: block;
+    max-height: 500px;
+    opacity: 1;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Input form styling */
+label {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: inset 5px 5px 10px #d1d8e4, inset -5px -5px 10px #ffffff;
+    outline: none;
+    font-size: 16px;
+    background-color: #f9fafb;
+    color: #333;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+    box-shadow: inset 5px 5px 10px #b3b9c7, inset -5px -5px 10px #ffffff;
+    background-color: #eef1f5;
+}
+
+input[type="number"]::placeholder {
+    color: #b0b6be;
+    opacity: 1;
+}
+
+/* Button styling */
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+}
+
+.submit-btn:active {
+    background-color: #1e7e34;
+    transform: translateY(0);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Information section */
+.info {
+    margin-top: 30px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #007BFF;
+    transition: font-size 0.3s ease, color 0.3s ease;
+}
+
+.info p {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.info:hover {
+    background-color: #f9fafb;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.info h2:hover {
+    color: #0056b3;
+}
+
+.info p:hover {
+    color: #333;
+}
+
+/* Calculate again button */
+.calculate-again {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.calculate-again:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+}
+
+.calculate-again:focus {
+    background-color: #388e3c;
+    outline: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.header h1 {
+    animation: fadeIn 1s ease-in-out;
+}
+
+.container {
+    animation: slideIn 1s ease-in-out;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    input[type="number"],
+    select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .info h2 {
+        font-size: 20px;
+    }
+
+    .info p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        padding: 5px;
+    }
+
+    input[type="number"],
+    select {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .submit-btn {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .info h2 {
+        font-size: 18px;
+    }
+
+    .info p {
+        font-size: 14px;
+    }
+}
+
+/* Accessibility: Focus outline */
+.submit-btn:focus,
+.dropdown-button:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+.dropdown-content:focus {
+    outline: 2px solid #d1d8e4;
+}
+
+    </style>
+
+    <title>Tax Calculator</title>
+
+    <script>
+        function toggleDropdown(event) {
+            const dropdownContent = event.currentTarget.nextElementSibling;
+            dropdownContent.classList.toggle('active');
+        }
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <h1>Tax Calculator</h1>
+</div>
+
+<div class="container">
+    <form action="/tax-calculate" method="post">
+        <div class="dropdown">
+            <button class="dropdown-button" type="button" onclick="toggleDropdown(event)">Income</button>
+            <div class="dropdown-content">
+                <label>Gross Salary Income:</label>
+                <input type="number" name="grossSalary" value="0" required>
+                <label>Other Income:</label>
+                <input type="number" name="otherIncome" value="0" required>
+                <label>Interest Income:</label>
+                <input type="number" name="interestIncome" value="0" required>
+                <label>Rental Income:</label>
+                <input type="number" name="rentalIncome" value="0" required>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropdown-button" type="button" onclick="toggleDropdown(event)">Deductions</button>
+            <div class="dropdown-content">
+                <label>Deductions u/s 80C:</label>
+                <input type="number" name="deductions80C" value="0" required>
+                <label>NPS Deduction:</label>
+                <input type="number" name="npsDeduction" value="0" required>
+                <label>Medical Insurance:</label>
+                <input type="number" name="medicalInsurance" value="0" required>
+                <label>Charity Donation:</label>
+                <input type="number" name="charityDonation" value="0" required>
+                <label>Edu Loan Interest:</label>
+                <input type="number" name="eduLoanInterest" value="0" required>
+                <label>Savings Interest:</label>
+                <input type="number" name="savingsInterest" value="0" required>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropdown-button" type="button" onclick="toggleDropdown(event)">HRA Details</button>
+            <div class="dropdown-content">
+                <label>Basic Salary:</label>
+                <input type="number" name="basicSalary" value="0" required>
+                <label>DA Received:</label>
+                <input type="number" name="daReceived" value="0" required>
+                <label>HRA Received:</label>
+                <input type="number" name="hraReceived" value="0" required>
+                <label>Rent Paid:</label>
+                <input type="number" name="rentPaid" value="0" required>
+                <label>Metro City:</label>
+                <select name="metroCity" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Calculate Tax</button>
+        <a href="/" class="calculate-again">Back to Home</a>
+    </form>
+
+    <div class="info">
+        <h2>Understanding Tax Calculators</h2>
+        <p>This tool helps you calculate your taxes based on your income and available deductions, aligned with the latest regulations.</p>
+        
+        <h2>How to Use the Tax Calculator</h2>
+        <p>Fill in your income details and deductions, then click "Calculate Tax" to get your estimated tax liability.</p>
+
+        <h2>Benefits of Using This Calculator</h2>
+        <ul>
+            <li><strong>Accuracy:</strong> Get precise calculations for your tax obligations.</li>
+            <li><strong>Convenience:</strong> Accessible anytime, anywhere to help plan your finances.</li>
+            <li><strong>Privacy:</strong> Your financial data remains confidential.</li>
+        </ul>
+
+        <p>Start optimizing your tax savings today!</p>
+    </div>
+</div>
+</body>
+</html>

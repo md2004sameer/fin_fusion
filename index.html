@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinFusion</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+<h1>Welcome to Fin Fusion</h1>
+<div class="container">
+
+    <a class="calculator-link" href="/tax-calculator">Tax(ITR1) </a>
+    <a class="calculator-link" href="/tax-calculator2">Tax (ITR2) </a>
+
+    <a class="calculator-link" href="/sip-calculator">SIP </a>
+    <a class="calculator-link" href="/loan-calculator">Loan </a>
+    <a class="calculator-link" href="/emi-calculator">EMI </a>
+    <a class="calculator-link" href="/investment-calculator">Investment </a>
+    <a class="calculator-link" href="/retirement-calculator">Retirement</a>
+    <a class="calculator-link" href="/budget-calculator">Budget </a>
+    <a class="calculator-link" href="/compound-interest-calculator">Compound Interest </a>
+</div>
+
+<!-- Chatbot Section -->
+<div class="chatbot-container" id="chatbot-container">
+    <div class="chat-header">
+        <span>Chat with Geeni</span>
+        <div class="chat-icons">
+            <!-- Minimize Icon -->
+            <button class="chat-minimize-btn" id="chat-minimize">
+                <i class="fas fa-minus"></i>
+            </button>
+            <!-- Refresh Icon -->
+            <button class="chat-refresh-btn" id="chat-refresh">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+            <!-- Close Icon -->
+            <button class="chat-close-btn" id="chat-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <div class="chat-box" id="chatbox">
+        <div class="bot-message">Welcome! How can I assist you today?</div>
+        <div class="bot-message">Choose a topic:</div>
+        <div id="topic-list"></div>
+    </div>
+    <footer>
+        <input class="chat-input" id="chat-input" type="text" placeholder="Type a message...">
+        <button class="chat-submit" id="chat-submit">Send</button>
+    </footer>
+</div>
+
+<div class="finance-article">
+    <h3>Understanding the Basics of Finance</h3>
+    <p>Finance is the lifeblood of any economy, helping individuals, businesses, and governments manage their resources, investments, and debts. It involves the study of money management, investment strategies, and risk assessment, making it an essential part of modern society. Over the years, finance has evolved, giving rise to various fields like personal finance, corporate finance, and public finance.</p>
+
+    <p>In personal finance, individuals manage their money through budgeting, saving, and investing. It involves making decisions on how to spend, save, and invest to meet short- and long-term financial goals. Whether it's saving for a house, retirement, or a child’s education, personal finance is about making informed decisions that ensure financial stability.</p>
+
+    <p>Corporate finance, on the other hand, focuses on how companies handle their funding, capital structure, and investment decisions. The goal is to maximize shareholder value by optimizing the use of financial resources. This may involve raising capital through equity, managing debt, or investing in profitable ventures.</p>
+
+    <p>Public finance refers to the financial management of a country’s government. It encompasses taxation, government spending, and debt management, ensuring that the country’s resources are allocated efficiently to support public services and economic growth.</p>
+
+    <p>One key aspect of finance is risk management, which involves identifying, analyzing, and mitigating financial risks. For individuals, this might mean getting insurance or diversifying investments. For corporations, it could involve hedging against market fluctuations, while governments may focus on controlling inflation and ensuring economic stability.</p>
+
+    <p>Investment is another crucial component of finance. By investing in stocks, bonds, real estate, or businesses, individuals and companies seek to grow their wealth. However, investments come with risks, and understanding the risk-return tradeoff is fundamental to making sound financial decisions.</p>
+
+    <p>The global financial market is interconnected, with events in one part of the world impacting economies elsewhere. Financial institutions like banks, stock exchanges, and investment firms play a crucial role in facilitating transactions, providing liquidity, and offering financial products to consumers and businesses.</p>
+
+    <p>Finance also involves the study of monetary policy, where central banks control the money supply and interest rates to manage inflation and promote economic growth. The decisions of central banks can have wide-reaching effects on currency value, employment rates, and the overall health of the economy.</p>
+
+    <p>In conclusion, finance is a vast and dynamic field that affects every aspect of our lives. Whether it's managing personal savings, running a business, or shaping government policies, understanding finance is key to making informed and effective decisions in today’s complex economic landscape.</p>
+</div>
+
+
+
+<script> document.addEventListener("DOMContentLoaded", function() {
+    const chatbotContainer = document.querySelector(".chatbot-container");
+    const chatbox = document.getElementById("chatbox");
+    const chatInput = document.getElementById("chat-input");
+    const chatSubmit = document.getElementById("chat-submit");
+    const chatClose = document.getElementById("chat-close");
+    const chatMinimize = document.getElementById("chat-minimize");
+    const chatRefresh = document.getElementById("chat-refresh");
+    const topicList = document.getElementById("topic-list");
+
+    // Predefined questions and answers related to finance and tax
+    const questionsAndAnswers = {
+        "What is Income Tax?": "Income tax is a tax imposed by the government on income generated by individuals or entities. It is calculated based on a percentage of the total income earned.",
+        "How do I calculate my Income Tax?": "To calculate your income tax, you need to know your taxable income and apply the appropriate tax rate based on your income slab.",
+        "What is GST?": "GST (Goods and Services Tax) is a single tax on the supply of goods and services, replacing multiple indirect taxes like VAT, service tax, etc.",
+        "What are tax deductions?": "Tax deductions are expenses allowed by the government that reduce your taxable income, thereby reducing the amount of tax you need to pay.",
+        "How can I save taxes?": "You can save taxes by investing in tax-saving instruments like PPF, NPS, and 80C investments, and by taking advantage of deductions for home loans, education, etc.",
+        "What is a mutual fund?": "A mutual fund is a pool of funds collected from various investors to invest in securities like stocks, bonds, and other financial instruments.",
+        "What is a SIP (Systematic Investment Plan)?": "SIP is a way of investing a fixed amount regularly in mutual funds. It helps in building wealth over time through compounding."
+    };
+
+    // Function to show topics (questions)
+    function showTopics() {
+        topicList.innerHTML = "";
+        Object.keys(questionsAndAnswers).forEach(question => {
+            const button = document.createElement("button");
+            button.textContent = question;
+            button.classList.add("topic-button");
+            button.onclick = () => showAnswer(question);
+            topicList.appendChild(button);
+        });
+    }
+
+    // Function to show the answer when a question is clicked
+    function showAnswer(question) {
+        const answer = questionsAndAnswers[question];
+        chatbox.innerHTML += `<div class="user-message">${question}</div>`;
+        chatbox.scrollTop = chatbox.scrollHeight;
+
+        setTimeout(() => {
+            chatbox.innerHTML += `<div class="bot-message">${answer}</div>`;
+            chatbox.scrollTop = chatbox.scrollHeight;
+            showTopics(); // Show topic list again after answering
+        }, 1000);
+    }
+
+    // Handle the submit event
+    chatSubmit.addEventListener("click", function() {
+        const userMessage = chatInput.value.trim();
+        if (userMessage) {
+            chatbox.innerHTML += `<div class="user-message">${userMessage}</div>`;
+            chatInput.value = "";
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            // Simple bot response for user input
+            setTimeout(() => {
+                chatbox.innerHTML += `<div class="bot-message">Sorry, I don't have an answer for that.</div>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            }, 1000);
+        }
+    });
+
+    // Open and close chatbot
+    const toggleChatbot = () => {
+        chatbotContainer.style.display = (chatbotContainer.style.display === "none" || !chatbotContainer.style.display) ? "flex" : "none";
+    };
+
+    // Minimize the chatbot
+    const minimizeChatbot = () => {
+        const chatboxHeight = chatbotContainer.style.height === "50px" ? "350px" : "50px";
+        chatbotContainer.style.height = chatboxHeight;
+        chatbox.style.display = chatboxHeight === "50px" ? "none" : "block";
+    };
+
+    // Refresh the chatbot
+    const refreshChatbot = () => {
+        chatbox.innerHTML = '<div class="bot-message">Welcome! How can I assist you today?</div>';
+        showTopics();
+    };
+
+    // Initial chatbot load
+    toggleChatbot();
+    showTopics();
+
+    // Event listeners
+    chatMinimize.addEventListener("click", minimizeChatbot);
+    chatRefresh.addEventListener("click", refreshChatbot);
+    chatClose.addEventListener("click", toggleChatbot);
+});
+</script>
+</body>
+</html>

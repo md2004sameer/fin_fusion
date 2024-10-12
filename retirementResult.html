@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Result</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            max-width: 700px;
+        }
+        h1 {
+            color: #333;
+        }
+        .result {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .monthly-payment {
+            font-size: 1.5em;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+<h1>Loan Result</h1>
+<div class="result">
+    <p>Your monthly payment is: <span class="monthly-payment" th:text="${#numbers.formatDecimal(monthlyPayment, 2, 2)}"></span></p>
+    <a href="/loan-calculator">Calculate Again</a>
+</div>
+</body>
+</html>

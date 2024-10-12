@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <style>
+    /* Base Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f2f6ff;
+        color: #333;
+        margin: 0;
+        max-width: 700px;
+        padding: 0;
+        line-height: 1.6;
+        margin-left: 50px;
+    }
+    .container {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    /* Header Styles */
+    .header {
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(145deg, #d8e3f1, #ffffff);
+        box-shadow: 5px 5px 10px #b3b9c7, -5px -5px 10px #ffffff;
+        border-radius: 20px;
+        margin: 20px;
+    }
+    .header h1 {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
+    /* Dropdown Styles */
+    .dropdown {
+        margin-bottom: 20px;
+        position: relative;
+    }
+    .dropdown-button {
+        background: #007BFF;
+        color: white;
+        padding: 15px;
+        border: none;
+        width: 100%;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: left;
+    }
+    .dropdown-content {
+        display: none;
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        margin-top: 5px;
+    }
+    .dropdown-content.active {
+        display: block;
+    }
+    /* Input form styling */
+    label {
+        font-size: 18px;
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #333;
+    }
+    input[type="number"], select {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background-color: #f9fafb;
+        color: #333;
+        font-size: 16px;
+    }
+    /* Button styling */
+    .submit-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 15px;
+        border: none;
+        width: 100%;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .calculate-again {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+  </style>
+  <title>Tax Calculator</title>
+  <script>
+    function toggleDropdown(event) {
+        const dropdownContent = event.currentTarget.nextElementSibling;
+        dropdownContent.classList.toggle('active');
+    }
+  </script>
+</head>
+<body>
+
+<div class="header">
+  <h1>Tax Calculator</h1>
+  <p>Based On ITR-2</p>
+</div>
+
+<div class="container">
+  <form action="/tax-calculate2" method="post">
+    <div class="dropdown">
+      <button class="dropdown-button" type="button" onclick="toggleDropdown(event)">Income</button>
+      <div class="dropdown-content">
+        <label>Gross Salary Income:</label>
+        <input type="number" name="grossSalary" value="0" required>
+        <label>Other Income:</label>
+        <input type="number" name="otherIncome" value="0" required>
+        <label>Interest Income:</label>
+        <input type="number" name="interestIncome" value="0" required>
+        <label>Rental Income:</label>
+        <input type="number" name="rentalIncome" value="0" required>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropdown-button" type="button" onclick="toggleDropdown(event)">Deductions</button>
+      <div class="dropdown-content">
+        <label>Deductions u/s 80C:</label>
+        <input type="number" name="deductions80C" value="0" required>
+        <label>NPS Deduction:</label>
+        <input type="number" name="npsDeduction" value="0" required>
+        <label>Medical Insurance:</label>
+        <input type="number" name="medicalInsurance" value="0" required>
+        <label>Charity Donation:</label>
+        <input type="number" name="charityDonation" value="0" required>
+        <label>Edu Loan Interest:</label>
+        <input type="number" name="eduLoanInterest" value="0" required>
+        <label>Savings Interest:</label>
+        <input type="number" name="savingsInterest" value="0" required>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropdown-button" type="button" onclick="toggleDropdown(event)">HRA Details</button>
+      <div class="dropdown-content">
+        <label>Basic Salary:</label>
+        <input type="number" name="basicSalary" value="0" required>
+        <label>DA Received:</label>
+        <input type="number" name="daReceived" value="0" required>
+        <label>HRA Received:</label>
+        <input type="number" name="hraReceived" value="0" required>
+        <label>Rent Paid:</label>
+        <input type="number" name="rentPaid" value="0" required>
+        <label>Metro City:</label>
+        <select name="metroCity" required>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Calculate Tax</button>
+    <a href="/" class="calculate-again">Back to Home</a>
+  </form>
+</div>
+</body>
+</html>

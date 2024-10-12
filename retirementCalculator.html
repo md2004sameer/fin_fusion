@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            max-width: 700px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<h1>Retirement Calculator</h1>
+<form action="/retirement-calculate" method="post">
+    <label>Current Age:</label>
+    <input type="number" name="currentAge" required>
+    <label>Retirement Age:</label>
+    <input type="number" name="retirementAge" required>
+    <label>Monthly Savings:</label>
+    <input type="number" name="monthlySavings" required>
+    <label>Expected Return (in %):</label>
+    <input type="number" name="expectedReturn" required>
+    <button type="submit">Calculate Retirement Savings</button>
+    <button class="button" onclick="window.location.href='/'">Back to Home</button>
+</form>
+</body>
+</html>

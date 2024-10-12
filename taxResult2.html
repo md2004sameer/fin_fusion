@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Tax Calculation Result</title>
+  <style>
+    /* Base Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f2f6ff;
+        color: #333;
+        margin: 0;
+        max-width: 700px;
+        padding: 20px;
+    }
+    .header {
+        text-align: center;
+        padding: 20px;
+        background: linear-gradient(145deg, #d8e3f1, #ffffff);
+        box-shadow: 5px 5px 10px #b3b9c7, -5px -5px 10px #ffffff;
+        border-radius: 20px;
+        margin-bottom: 20px;
+    }
+    .header h1 {
+        font-size: 36px;
+    }
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .result {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+    .best-regime {
+        font-weight: bold;
+        color: #4CAF50;
+    }
+    .calculate-again {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <h1>Tax Calculation Result</h1>
+</div>
+<div class="container">
+  <div class="result">
+    <p>Tax under Old Regime: ₹<span th:text="${taxOldRegime}"></span></p>
+    <p>Tax under New Regime: ₹<span th:text="${taxNewRegime}"></span></p>
+    <p class="best-regime">The better regime for you is: <span th:text="${bestRegime}"></span></p>
+  </div>
+  <a href="/" class="calculate-again">Calculate Again</a>
+</div>
+</body>
+</html>
